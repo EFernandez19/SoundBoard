@@ -13,9 +13,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonSound1.setOnClickListener{
-            val toast = Toast.makeText(this, "Button Pressed", Toast.LENGTH_SHORT)
-            toast.show()
-        }
+        binding.buttonSound1.setOnClickListener{buttonPressed(binding.buttonSound1.text.toString())}
+        binding.buttonSound2.setOnClickListener{buttonPressed(binding.buttonSound2.text.toString())}
+        binding.buttonSound3.setOnClickListener{buttonPressed(binding.buttonSound3.text.toString())}
+
+    }
+
+    fun buttonPressed(buttonId:String){
+        val toast = Toast.makeText(this, buttonId, Toast.LENGTH_SHORT)
+        toast.show()
     }
 }
