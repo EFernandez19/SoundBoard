@@ -20,10 +20,31 @@
         android:id="@+id/button_sound1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/button_1"
+        android:text="@string/bell"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/button_sound2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/applause"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/button_sound1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/button_sound3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/horn"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/button_sound2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
