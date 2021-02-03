@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="@string/settings" />
+            android:id="@+id/nav_bell"
+            android:icon="@drawable/ic_bell"
+            android:title="@string/bell" />
+        <item
+            android:id="@+id/nav_applause"
+            android:title="@string/applause" />
+        <item
+            android:id="@+id/nav_horn"
+            android:title="@string/horn" />
     </group>
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
 </menu>
