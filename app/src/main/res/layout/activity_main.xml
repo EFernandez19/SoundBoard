@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity"
-    tools:openDrawer="">
+    tools:openDrawer="start">
 
     <LinearLayout
         android:id="@+id/linear_layout"
@@ -24,17 +24,19 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <!--
         <include
             android:id="@+id/inc_layout"
             layout="@layout/default_sounds_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <!--
-                <FrameLayout
-                    android:id="@+id/fragment_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-        -->
+            -->
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
