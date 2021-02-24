@@ -10,35 +10,47 @@ will create/destroy soundpool
 load/play/stop sounds
  */
 class SoundPoolManager(
-    var context: Context,
+    var context: Context? = null,
     private var soundPool: SoundPool? = null,
     private var audioAttributes: AudioAttributes? = null,
-    private val soundMap:HashMap<Int, Int> = HashMap<Int, Int>()
+    private val soundMap: HashMap<Int, Int> = HashMap<Int, Int>()
 ) {
 
     //instantiate the SoundPool
-    fun buildSoundPool(soundPool:SoundPool?=null, audioAttributes:AudioAttributes?=null, maxstreams: Int=5){
+    fun buildSoundPool(
+        context: Context?,
+        soundPool: SoundPool? = null,
+        audioAttributes: AudioAttributes? = null,
+        maxstreams: Int = 5
+    ): SoundPoolManager {
+        this.context = context
+
         //build audioAttributes
-        this.audioAttributes = audioAttributes ?: AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+        this.audioAttributes = audioAttributes ?: AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
         //build soundPool
-        this.soundPool = soundPool ?: SoundPool.Builder().setMaxStreams(maxstreams).setAudioAttributes(audioAttributes)
+        this.soundPool = soundPool ?: SoundPool.Builder().setMaxStreams(maxstreams)
+            .setAudioAttributes(this.audioAttributes)
             .build()
+
+        return this
     }
+
 
     //adds sounds to soundMap
-    fun addSound(soundId:Int, sound:Int){
-        soundMap[soundId] = soundPool?.load(context, sound, 1)?:0
+    fun addSound(soundId: Int, sound: Int) {
+        soundMap[soundId] = soundPool?.load(context, sound, 1) ?: 0
     }
 
-    fun playSound(soundId:Int){
-        soundMap[soundId]?.let { soundPool?.play(it, 1F, 1F, 0,0,1F) }
+    fun playSound(soundId: Int) {
+        soundMap[soundId]?.let { soundPool?.play(it, 1F, 1F, 0, 0, 1F) }
     }
 
     //destroy soundPool
-    fun destroy(){
-        soundPool=null
-        audioAttributes=null
+    fun destroy() {
+        soundPool = null
+        audioAttributes = null
     }
 }
