@@ -34,7 +34,6 @@ class SoundPoolManager(
         this.soundPool = soundPool ?: SoundPool.Builder().setMaxStreams(maxstreams)
             .setAudioAttributes(this.audioAttributes)
             .build()
-
     }
 
 
