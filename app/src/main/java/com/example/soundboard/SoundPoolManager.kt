@@ -22,7 +22,7 @@ class SoundPoolManager(
         soundPool: SoundPool? = null,
         audioAttributes: AudioAttributes? = null,
         maxstreams: Int = 5
-    ): SoundPoolManager {
+    ) {
         this.context = context
 
         //build audioAttributes
@@ -35,7 +35,6 @@ class SoundPoolManager(
             .setAudioAttributes(this.audioAttributes)
             .build()
 
-        return this
     }
 
 
