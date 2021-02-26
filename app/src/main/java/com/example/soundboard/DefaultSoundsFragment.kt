@@ -23,8 +23,22 @@ class DefaultSoundsFragment : Fragment() {
         defSoundBinding.buttonSound2.setOnClickListener { buttonClicked(defSoundBinding.buttonSound2.id) }
         defSoundBinding.buttonSound3.setOnClickListener { buttonClicked(defSoundBinding.buttonSound3.id) }
 
+        val assetScan = AssetsScanner(activity)
+        assetScan.listAll("raw")
+        assetScan.listDir("raw")
+        assetScan.listFiles("raw")
+
+
         //Sound stuff
         soundPoolManager.buildSoundPool(activity)
+        //soundPoolManager.addSound(defSoundBinding.buttonSound1.id, R.raw.bellsound)
+        /*
+        activity?.resources?.assets?.openFd("raw\\bellsound.wav")?.let {
+            soundPoolManager.addSound(defSoundBinding.buttonSound1.id,
+                it
+            )
+        }
+         */
         soundPoolManager.addSound(defSoundBinding.buttonSound1.id, R.raw.bellsound)
         soundPoolManager.addSound(defSoundBinding.buttonSound2.id, R.raw.applausesound)
         soundPoolManager.addSound(defSoundBinding.buttonSound3.id, R.raw.airhornsound)
