@@ -10,21 +10,18 @@ will create/destroy soundpool
 load/play/stop sounds
  */
 class SoundPoolManager(
-    var context: Context? = null,
+    private var context: Context?,
     private var soundPool: SoundPool? = null,
     private var audioAttributes: AudioAttributes? = null,
-    private val soundMap: HashMap<Int, Int> = HashMap<Int, Int>()
+    private val soundMap: HashMap<Int, Int> = HashMap()
 ) {
 
     //instantiate the SoundPool
     fun buildSoundPool(
-        context: Context?,
         soundPool: SoundPool? = null,
         audioAttributes: AudioAttributes? = null,
         maxstreams: Int = 5
     ) {
-        this.context = context
-
         //build audioAttributes
         this.audioAttributes = audioAttributes ?: AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
