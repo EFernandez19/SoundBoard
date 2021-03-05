@@ -40,8 +40,8 @@ class SoundPoolManager(
         soundMap[soundId] = soundPool?.load(context, sound, 1) ?: 0
     }
 
-    fun addSound(soundId: Int, assetFileDescriptor: AssetFileDescriptor?){
-            soundMap[soundId] = soundPool?.load(assetFileDescriptor,1) ?:0
+    fun addSound(soundId: Int, assetFileDescriptor: AssetFileDescriptor?) {
+        soundMap[soundId] = soundPool?.load(assetFileDescriptor, 1) ?: 0
     }
 
     fun playSound(soundId: Int) {

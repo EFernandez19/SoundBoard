@@ -24,20 +24,19 @@ class AssetsScanner(
     }
 
     //List all files in path, non-recursive
-    fun listFiles(path:String): Array<String>{
-        return buildList(path) {
-            assetPath: String -> assetManager?.list(assetPath)?.size!! <1
+    fun listFiles(path: String): Array<String> {
+        return buildList(path) { assetPath: String ->
+            assetManager?.list(assetPath)?.size!! < 1
         }
     }
 
     //build list based on incoming boolean function
-    private fun buildList(path:String, operation: (String) -> Boolean): Array<String>{
+    private fun buildList(path: String, operation: (String) -> Boolean): Array<String> {
         val assetList = listAll(path)
         val dirs = emptyList<String>().toMutableList()
 
-        if(assetList !=null){
-            for(asset in assetList)
-            {
+        if (assetList != null) {
+            for (asset in assetList) {
                 //build new path to file/directory
                 val assetPath: String = if (path == "")
                     asset
@@ -45,14 +44,14 @@ class AssetsScanner(
                     "$path/$asset"
 
                 //check file/directory
-                if(operation(assetPath))
+                if (operation(assetPath))
                     dirs.add(asset)
             }
         }
         return dirs.toTypedArray()
     }
 
-    fun openFd(fileName: String):AssetFileDescriptor?{
+    fun openFd(fileName: String): AssetFileDescriptor? {
         return assetManager?.openFd(fileName)
     }
 }

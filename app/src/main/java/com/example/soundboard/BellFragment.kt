@@ -14,7 +14,7 @@ import com.example.soundboard.databinding.FragmentBellBinding
 
 class BellFragment : Fragment() {
     private lateinit var bellFragBinding: FragmentBellBinding
-    private lateinit var soundPoolManager:SoundPoolManager
+    private lateinit var soundPoolManager: SoundPoolManager
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -26,10 +26,10 @@ class BellFragment : Fragment() {
         bellFragBinding = FragmentBellBinding.inflate(layoutInflater, container, false)
 
         val linlay: LinearLayoutCompat = bellFragBinding.linearlayoutBellFragment
-        
+
         soundPoolManager = SoundPoolManager(activity)
         soundPoolManager.buildSoundPool()
-        
+
         addButtons(activity, linlay)
 
         return bellFragBinding.root
@@ -37,10 +37,9 @@ class BellFragment : Fragment() {
 
     //dynamically create buttons based on how many sound files there are
     private fun addButtons(context: Context?, container: ViewGroup) {
-        val directory = "raw/Bell"
+        val directoryPath = "raw/Bell"
         val assetsScanner = AssetsScanner(context)
-
-        val buttonNames = assetsScanner.listFiles(directory)
+        val buttonNames = assetsScanner.listFiles(directoryPath)
 
         for (buttonName in buttonNames) {
             //create button
@@ -54,15 +53,15 @@ class BellFragment : Fragment() {
             )
             generatedButton.setOnClickListener { buttonPressed(generatedButton.id) }
 
-            val buttonPath = "$directory/$buttonName"
+            val buttonPath = "$directoryPath/$buttonName"
 
             //Try to load sound from assets
             try {
                 soundPoolManager.addSound(generatedButton.id, assetsScanner.openFd(buttonPath))
-            }
-            catch(e: Exception){} //if not found do nothing
+            } catch (e: Exception) {
+            } //if not found do nothing
 
-            
+
             container.addView(generatedButton)
         }
     }
