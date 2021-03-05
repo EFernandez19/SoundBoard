@@ -1,6 +1,7 @@
 package com.example.soundboard
 
 import android.content.Context
+import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 
 class AssetsScanner(
@@ -49,5 +50,9 @@ class AssetsScanner(
             }
         }
         return dirs.toTypedArray()
+    }
+
+    fun openFd(fileName: String):AssetFileDescriptor?{
+        return assetManager?.openFd(fileName)
     }
 }

@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BellFragment()).commit()
-            navigationView.setCheckedItem(R.id.nav_applause)
+            navigationView.setCheckedItem(R.id.nav_bell)
         }
     }
 

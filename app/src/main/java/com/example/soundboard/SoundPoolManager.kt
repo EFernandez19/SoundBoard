@@ -1,6 +1,7 @@
 package com.example.soundboard
 
 import android.content.Context
+import android.content.res.AssetFileDescriptor
 import android.media.AudioAttributes
 import android.media.SoundPool
 
@@ -37,6 +38,10 @@ class SoundPoolManager(
     //adds sounds to soundMap
     fun addSound(soundId: Int, sound: Int) {
         soundMap[soundId] = soundPool?.load(context, sound, 1) ?: 0
+    }
+
+    fun addSound(soundId: Int, assetFileDescriptor: AssetFileDescriptor?){
+            soundMap[soundId] = soundPool?.load(assetFileDescriptor,1) ?:0
     }
 
     fun playSound(soundId: Int) {

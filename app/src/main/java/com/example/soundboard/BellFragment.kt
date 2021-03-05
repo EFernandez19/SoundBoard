@@ -37,27 +37,37 @@ class BellFragment : Fragment() {
 
     //dynamically create buttons based on how many sound files there are
     private fun addButtons(context: Context?, container: ViewGroup) {
+        val directory = "raw/Bell"
         val assetsScanner = AssetsScanner(context)
 
-        val buttonNames = assetsScanner.listFiles("raw/Bell")
+        val buttonNames = assetsScanner.listFiles(directory)
 
         for (buttonName in buttonNames) {
             //create button
             val generatedButton = layoutInflater.inflate(R.layout.button, null) as Button
-            generatedButton.text = buttonName.substring(0, buttonName.lastIndexOf("."))
+            val buttonText = buttonName.substring(0, buttonName.lastIndexOf("."))
+            generatedButton.text = buttonText
+            generatedButton.id = buttonText.hashCode()
             generatedButton.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            generatedButton.setOnClickListener { generatedButton.id }
+            generatedButton.setOnClickListener { buttonPressed(generatedButton.id) }
 
-            // TODO: 2/26/2021 Load sound from assets 
+            val buttonPath = "$directory/$buttonName"
+
+            //Try to load sound from assets
+            try {
+                soundPoolManager.addSound(generatedButton.id, assetsScanner.openFd(buttonPath))
+            }
+            catch(e: Exception){} //if not found do nothing
+
             
             container.addView(generatedButton)
         }
     }
 
-    fun buttonPressed(buttonId: Int) {
-        // TODO: 2/26/2021 play sound when button pressed
+    private fun buttonPressed(buttonId: Int) {
+        soundPoolManager.playSound(buttonId)
     }
 }
