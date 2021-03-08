@@ -11,7 +11,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 import com.example.soundboard.databinding.FragmentSoundBinding
 
-class SoundFragment(val fragName:String) : Fragment() {
+class SoundFragment(private val fragName: String) : Fragment() {
     private lateinit var soundFragBinding: FragmentSoundBinding
     private lateinit var soundPoolManager: SoundPoolManager
 
@@ -61,6 +61,7 @@ class SoundFragment(val fragName:String) : Fragment() {
             try {
                 soundPoolManager.addSound(generatedButton.id, assetsScanner.openFd(buttonPath))
             } catch (e: Exception) {
+                continue
             } //if not found do nothing
 
 

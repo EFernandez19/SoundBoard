@@ -1,10 +1,12 @@
 package com.example.soundboard
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.soundboard.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
@@ -39,24 +41,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         populateNavigationViewMenu(navigationView)
 
-        /*
+
         //set default fragment
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, SoundFragment("Bell")).commit()
-            navigationView.setCheckedItem(R.id.nav_bell)
+            navigationView.setCheckedItem(navigationView.menu.getItem(0))
         }
-
-         */
     }
 
-    private fun populateNavigationViewMenu(navigationView: NavigationView){
+    private fun populateNavigationViewMenu(navigationView: NavigationView) {
         val assetsScanner = AssetsScanner(this)
         val dirNames = assetsScanner.listDir("raw")
 
-        for(dir in dirNames)
-            navigationView.menu.add(dir)
-            //navigationView.menu.add("test thing").setIcon(R.drawable.ic_settings)
+        for (dir in dirNames)
+            navigationView.menu.add(1, Menu.NONE, Menu.NONE, dir)
+        //navigationView.menu.add("test thing").setIcon(R.drawable.ic_settings)
+
+        //make group checkable, lets user know which item is selected
+        navigationView.menu.setGroupCheckable(1, true, true)
     }
 
     override fun onBackPressed() {
@@ -67,16 +70,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        //determine what fragment is shown
-        /*
-        when (item.getItemId()) {
-            R.id.nav_bell -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, SoundFragment("Bell")).commit()
-            R.id.nav_applause -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, DefaultSoundsFragment()).commit()
-        }
-         */
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SoundFragment(item.title as String)).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, SoundFragment(item.title as String)).commit()
 
         drawer.closeDrawer(GravityCompat.START)
         return true

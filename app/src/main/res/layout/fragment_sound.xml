@@ -20,21 +20,21 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingTop="100dp"
-        android:paddingBottom="100dp"
         app:layout_constraintTop_toBottomOf="@id/textview_name">
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearlayout_bell_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:dividerPadding="16dp"/>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearlayout_bell_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:dividerPadding="16dp" />
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
