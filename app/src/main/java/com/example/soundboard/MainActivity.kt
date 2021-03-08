@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.soundboard.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
@@ -37,12 +38,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener(this)
 
+        populateNavigationView(navigationView)
+
         //set default fragment
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BellFragment()).commit()
             navigationView.setCheckedItem(R.id.nav_bell)
         }
+    }
+
+    private fun populateNavigationView(navigationView: NavigationView){
+        val assetsScanner = AssetsScanner(this)
+        val dirNames = assetsScanner.listDir("raw")
+
+        for(dir in dirNames)
+            navigationView.menu.add(dir)
+            //navigationView.menu.add("test thing").setIcon(R.drawable.ic_settings)
     }
 
     override fun onBackPressed() {
