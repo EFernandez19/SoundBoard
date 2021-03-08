@@ -1,6 +1,5 @@
 package com.example.soundboard
 
-import android.media.SoundPool
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -41,8 +40,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //set default fragment
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, DefaultSoundsFragment()).commit()
-            navigationView.setCheckedItem(R.id.nav_applause)
+                .replace(R.id.fragment_container, BellFragment()).commit()
+            navigationView.setCheckedItem(R.id.nav_bell)
         }
     }
 
