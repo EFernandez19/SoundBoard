@@ -1,6 +1,5 @@
 package com.example.soundboard
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,34 +9,37 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
-import com.example.soundboard.databinding.FragmentBellBinding
+import com.example.soundboard.databinding.FragmentSoundBinding
 
-class BellFragment : Fragment() {
-    private lateinit var bellFragBinding: FragmentBellBinding
+class SoundFragment(private val fragName: String) : Fragment() {
+    private lateinit var soundFragBinding: FragmentSoundBinding
     private lateinit var soundPoolManager: SoundPoolManager
 
-    @SuppressLint("SetTextI18n")
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        bellFragBinding = FragmentBellBinding.inflate(layoutInflater, container, false)
+        soundFragBinding = FragmentSoundBinding.inflate(layoutInflater, container, false)
 
-        val linlay: LinearLayoutCompat = bellFragBinding.linearlayoutBellFragment
+        //write fragName at top of fragment
+        soundFragBinding.textviewName.text = fragName
+
+        val linlay: LinearLayoutCompat = soundFragBinding.linearlayoutBellFragment
 
         soundPoolManager = SoundPoolManager(activity)
         soundPoolManager.buildSoundPool()
 
         addButtons(activity, linlay)
 
-        return bellFragBinding.root
+        return soundFragBinding.root
     }
 
     //dynamically create buttons based on how many sound files there are
     private fun addButtons(context: Context?, container: ViewGroup) {
-        val directoryPath = "raw/Bell"
+        val directoryPath = "raw/$fragName"
         val assetsScanner = AssetsScanner(context)
         val buttonNames = assetsScanner.listFiles(directoryPath)
 
@@ -59,6 +61,7 @@ class BellFragment : Fragment() {
             try {
                 soundPoolManager.addSound(generatedButton.id, assetsScanner.openFd(buttonPath))
             } catch (e: Exception) {
+                continue
             } //if not found do nothing
 
 
