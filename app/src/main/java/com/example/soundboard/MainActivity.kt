@@ -5,7 +5,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.soundboard.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
@@ -38,17 +37,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener(this)
 
-        populateNavigationView(navigationView)
+        populateNavigationViewMenu(navigationView)
 
+        /*
         //set default fragment
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BellFragment()).commit()
+                .replace(R.id.fragment_container, SoundFragment("Bell")).commit()
             navigationView.setCheckedItem(R.id.nav_bell)
         }
+
+         */
     }
 
-    private fun populateNavigationView(navigationView: NavigationView){
+    private fun populateNavigationViewMenu(navigationView: NavigationView){
         val assetsScanner = AssetsScanner(this)
         val dirNames = assetsScanner.listDir("raw")
 
@@ -66,12 +68,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         //determine what fragment is shown
+        /*
         when (item.getItemId()) {
             R.id.nav_bell -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BellFragment()).commit()
+                .replace(R.id.fragment_container, SoundFragment("Bell")).commit()
             R.id.nav_applause -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, DefaultSoundsFragment()).commit()
         }
+         */
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SoundFragment(item.title as String)).commit()
 
         drawer.closeDrawer(GravityCompat.START)
         return true
