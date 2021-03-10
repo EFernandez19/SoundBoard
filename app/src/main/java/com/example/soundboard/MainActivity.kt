@@ -45,7 +45,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //set default fragment
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, SoundFragment("Bell")).commit()
+                .replace(
+                    R.id.fragment_container,
+                    SoundFragment(navigationView.menu.getItem(0).title as String)
+                ).commit()
             navigationView.setCheckedItem(navigationView.menu.getItem(0))
         }
     }
